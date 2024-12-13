@@ -1,0 +1,19 @@
+server:
+  port: 10086
+
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB  # 设置单个文件的最大大小为10MB
+      max-request-size: 100MB  # 设置请求的最大大小为100MB（包括所有文件）
+  datasource:
+    dynamic:
+      primary: master
+      strict: false #严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      datasource:
+        master:
+          url: jdbc:sqlserver://192.168.1.57:1433;databaseName=南城县zz
+          driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+          username: sa
+          password: WHpass#2019

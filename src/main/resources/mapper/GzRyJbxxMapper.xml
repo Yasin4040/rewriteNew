@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lizy.rewritenew.mapper.GzRyJbxxMapper">
+
+    <resultMap id="BaseResultMap" type="com.lizy.rewritenew.entity.GzRyJbxx">
+            <id property="rybm" column="RYBM" jdbcType="VARCHAR"/>
+            <id property="dwbm" column="DWBM" jdbcType="VARCHAR"/>
+            <result property="xm" column="XM" jdbcType="VARCHAR"/>
+            <result property="bmbm" column="BMBM" jdbcType="VARCHAR"/>
+            <result property="sex" column="SEX" jdbcType="VARCHAR"/>
+            <result property="sfzh" column="SFZH" jdbcType="VARCHAR"/>
+            <result property="jg" column="JG" jdbcType="VARCHAR"/>
+            <result property="mz" column="MZ" jdbcType="VARCHAR"/>
+            <result property="cjgzsj" column="CJGZSJ" jdbcType="VARCHAR"/>
+            <result property="csny" column="CSNY" jdbcType="VARCHAR"/>
+            <result property="jrdwsj" column="JRDWSJ" jdbcType="VARCHAR"/>
+            <result property="jrdwyy" column="JRDWYY" jdbcType="VARCHAR"/>
+            <result property="jrdwlx" column="JRDWLX" jdbcType="VARCHAR"/>
+            <result property="gzsfbm" column="GZSFBM" jdbcType="VARCHAR"/>
+            <result property="gwlx" column="GWLX" jdbcType="VARCHAR"/>
+            <result property="zzmm" column="ZZMM" jdbcType="VARCHAR"/>
+            <result property="rdsj" column="RDSJ" jdbcType="VARCHAR"/>
+            <result property="zdgl" column="ZDGL" jdbcType="SMALLINT"/>
+            <result property="yjxl" column="YJXL" jdbcType="SMALLINT"/>
+            <result property="djsj" column="DJSJ" jdbcType="VARCHAR"/>
+            <result property="jssj" column="JSSJ" jdbcType="VARCHAR"/>
+            <result property="ryzt" column="RYZT" jdbcType="VARCHAR"/>
+            <result property="rybz" column="RYBZ" jdbcType="VARCHAR"/>
+            <result property="lxglqssj" column="LXGLQSSJ" jdbcType="VARCHAR"/>
+            <result property="dlytny" column="DLYTNY" jdbcType="VARCHAR"/>
+            <result property="dabh" column="DABH" jdbcType="VARCHAR"/>
+            <result property="gzlxbm" column="GZLXBM" jdbcType="VARCHAR"/>
+            <result property="jkbydqlb" column="JKBYDQLB" jdbcType="VARCHAR"/>
+            <result property="pgjzbz" column="PGJZBZ" jdbcType="VARCHAR"/>
+            <result property="gzqfsj" column="GZQFSJ" jdbcType="VARCHAR"/>
+            <result property="gztfsj" column="GZTFSJ" jdbcType="VARCHAR"/>
+            <result property="ryjfxs" column="RYJFXS" jdbcType="VARCHAR"/>
+            <result property="ryglfs" column="RYGLFS" jdbcType="VARCHAR"/>
+            <result property="jhtgbl" column="JHTGBL" jdbcType="SMALLINT"/>
+            <result property="spdw" column="SPDW" jdbcType="VARCHAR"/>
+            <result property="jzsj" column="JZSJ" jdbcType="VARCHAR"/>
+            <result property="zdglys" column="ZDGLYS" jdbcType="SMALLINT"/>
+            <result property="gzglys" column="GZGLYS" jdbcType="SMALLINT"/>
+            <result property="yjzwlb" column="YJZWLB" jdbcType="VARCHAR"/>
+            <result property="yjdzwdj" column="YJDZWDJ" jdbcType="VARCHAR"/>
+            <result property="jdldzwbz" column="JDLDZWBZ" jdbcType="VARCHAR"/>
+            <result property="sggbbz" column="SGGBBZ" jdbcType="VARCHAR"/>
+            <result property="yhbm1" column="YHBM1" jdbcType="VARCHAR"/>
+            <result property="yhzh1" column="YHZH1" jdbcType="VARCHAR"/>
+            <result property="yhbm2" column="YHBM2" jdbcType="VARCHAR"/>
+            <result property="yhzh2" column="YHZH2" jdbcType="VARCHAR"/>
+            <result property="ryxh" column="RYXH" jdbcType="INTEGER"/>
+            <result property="gwydjsj" column="GWYDJSJ" jdbcType="VARCHAR"/>
+            <result property="ryhylb" column="RYHYLB" jdbcType="VARCHAR"/>
+            <result property="lxgl" column="LXGL" jdbcType="SMALLINT"/>
+            <result property="gzgkbm" column="GZGKBM" jdbcType="VARCHAR"/>
+            <result property="yskmbm" column="YSKMBM" jdbcType="VARCHAR"/>
+            <result property="gztfbz" column="GZTFBZ" jdbcType="VARCHAR"/>
+            <result property="dasf" column="DASF" jdbcType="VARCHAR"/>
+            <result property="sjsf" column="SJSF" jdbcType="VARCHAR"/>
+            <result property="bzxz" column="BZXZ" jdbcType="VARCHAR"/>
+            <result property="ggqkhzd06" column="GGQKHZD06" jdbcType="SMALLINT"/>
+            <result property="sffpdhxx" column="SFFPDHXX" jdbcType="VARCHAR"/>
+            <result property="gddcxj" column="GDDCXJ" jdbcType="SMALLINT"/>
+            <result property="ldbz" column="LDBZ" jdbcType="VARCHAR"/>
+            <result property="spbz" column="SPBZ" jdbcType="VARCHAR"/>
+            <result property="spsj" column="SPSJ" jdbcType="VARCHAR"/>
+            <result property="zxspsj" column="ZXSPSJ" jdbcType="VARCHAR"/>
+            <result property="spry" column="SPRY" jdbcType="VARCHAR"/>
+            <result property="gwydjbz" column="GWYDJBZ" jdbcType="VARCHAR"/>
+            <result property="by1" column="BY1" jdbcType="VARCHAR"/>
+            <result property="by2" column="BY2" jdbcType="VARCHAR"/>
+            <result property="by3" column="BY3" jdbcType="VARCHAR"/>
+            <result property="by4" column="BY4" jdbcType="VARCHAR"/>
+            <result property="by5" column="BY5" jdbcType="VARCHAR"/>
+            <result property="by6" column="BY6" jdbcType="VARCHAR"/>
+            <result property="by7" column="BY7" jdbcType="VARCHAR"/>
+            <result property="by8" column="BY8" jdbcType="VARCHAR"/>
+            <result property="by9" column="BY9" jdbcType="VARCHAR"/>
+            <result property="by10" column="BY10" jdbcType="VARCHAR"/>
+            <result property="by11" column="BY11" jdbcType="VARCHAR"/>
+            <result property="by12" column="BY12" jdbcType="VARCHAR"/>
+            <result property="by13" column="BY13" jdbcType="VARCHAR"/>
+            <result property="by14" column="BY14" jdbcType="VARCHAR"/>
+            <result property="by15" column="BY15" jdbcType="VARCHAR"/>
+            <result property="by16" column="BY16" jdbcType="VARCHAR"/>
+            <result property="by17" column="BY17" jdbcType="VARCHAR"/>
+            <result property="by18" column="BY18" jdbcType="VARCHAR"/>
+            <result property="by19" column="BY19" jdbcType="VARCHAR"/>
+            <result property="by20" column="BY20" jdbcType="VARCHAR"/>
+            <result property="by21" column="BY21" jdbcType="INTEGER"/>
+            <result property="by22" column="BY22" jdbcType="INTEGER"/>
+            <result property="by23" column="BY23" jdbcType="INTEGER"/>
+            <result property="ryid" column="ryid" jdbcType="INTEGER"/>
+            <result property="grbh" column="grbh" jdbcType="VARCHAR"/>
+            <result property="yctxyy" column="YCTXYY" jdbcType="VARCHAR"/>
+            <result property="ytns" column="YTNS" jdbcType="SMALLINT"/>
+            <result property="ytys" column="YTYS" jdbcType="SMALLINT"/>
+            <result property="zgjzxspsj" column="ZGJZXSPSJ" jdbcType="VARCHAR"/>
+            <result property="zgjspsj" column="ZGJSPSJ" jdbcType="VARCHAR"/>
+            <result property="zgjspbz" column="ZGJSPBZ" jdbcType="VARCHAR"/>
+            <result property="zgjspry" column="ZGJSPRY" jdbcType="VARCHAR"/>
+            <result property="csxggsj" column="CSXGGSJ" jdbcType="VARCHAR"/>
+            <result property="by24" column="BY24" jdbcType="VARCHAR"/>
+            <result property="by25" column="BY25" jdbcType="VARCHAR"/>
+            <result property="by26" column="BY26" jdbcType="VARCHAR"/>
+            <result property="by27" column="BY27" jdbcType="VARCHAR"/>
+            <result property="by28" column="BY28" jdbcType="VARCHAR"/>
+            <result property="by29" column="BY29" jdbcType="VARCHAR"/>
+            <result property="bzxzSpr" column="BZXZ_SPR" jdbcType="VARCHAR"/>
+            <result property="bzxzSpsj" column="BZXZ_SPSJ" jdbcType="VARCHAR"/>
+            <result property="bzxzSpbz" column="BZXZ_SPBZ" jdbcType="VARCHAR"/>
+            <result property="bzxzCznr" column="BZXZ_CZNR" jdbcType="VARCHAR"/>
+            <result property="bzxzYbzxz" column="BZXZ_YBZXZ" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        RYBM,DWBM,XM,
+        BMBM,SEX,SFZH,
+        JG,MZ,CJGZSJ,
+        CSNY,JRDWSJ,JRDWYY,
+        JRDWLX,GZSFBM,GWLX,
+        ZZMM,RDSJ,ZDGL,
+        YJXL,DJSJ,JSSJ,
+        RYZT,RYBZ,LXGLQSSJ,
+        DLYTNY,DABH,GZLXBM,
+        JKBYDQLB,PGJZBZ,GZQFSJ,
+        GZTFSJ,RYJFXS,RYGLFS,
+        JHTGBL,SPDW,JZSJ,
+        ZDGLYS,GZGLYS,YJZWLB,
+        YJDZWDJ,JDLDZWBZ,SGGBBZ,
+        YHBM1,YHZH1,YHBM2,
+        YHZH2,RYXH,GWYDJSJ,
+        RYHYLB,LXGL,GZGKBM,
+        YSKMBM,GZTFBZ,DASF,
+        SJSF,BZXZ,GGQKHZD06,
+        SFFPDHXX,GDDCXJ,LDBZ,
+        SPBZ,SPSJ,ZXSPSJ,
+        SPRY,GWYDJBZ,BY1,
+        BY2,BY3,BY4,
+        BY5,BY6,BY7,
+        BY8,BY9,BY10,
+        BY11,BY12,BY13,
+        BY14,BY15,BY16,
+        BY17,BY18,BY19,
+        BY20,BY21,BY22,
+        BY23,ryid,grbh,
+        YCTXYY,YTNS,YTYS,
+        ZGJZXSPSJ,ZGJSPSJ,ZGJSPBZ,
+        ZGJSPRY,CSXGGSJ,BY24,
+        BY25,BY26,BY27,
+        BY28,BY29,BZXZ_SPR,
+        BZXZ_SPSJ,BZXZ_SPBZ,BZXZ_CZNR,
+        BZXZ_YBZXZ
+    </sql>
+    <!-- 完善 updateBatchForIdName -->
+    <update id="updateBatchForIdName" parameterType="java.util.List">
+        <foreach collection="updateList" item="item" index="index" separator=";">
+            UPDATE GZ_RY_JBXX
+            SET xm = #{item.xm},
+            sfzh = #{item.sfzh}
+            WHERE rybm = #{item.rybm}
+        </foreach>
+    </update>
+
+
+
+
+<!--    <update id="updateBatchForIdName" parameterType="java.util.List">-->
+<!--        DECLARE @UpdateData UpdateType;-->
+
+<!--        INSERT INTO @UpdateData (rybm, xm, sfzh)-->
+<!--        VALUES-->
+<!--        <foreach collection="updateList" item="item" separator="," close=";">-->
+<!--            (#{item.rybm}, #{item.xm}, #{item.sfzh})-->
+<!--        </foreach>-->
+<!--        UPDATE GZ_RY_JBXX-->
+<!--        SET GZ_RY_JBXX.xm = ud.xm,-->
+<!--        GZ_RY_JBXX.sfzh = ud.sfzh-->
+<!--        FROM GZ_RY_JBXX-->
+<!--        JOIN @UpdateData ud ON GZ_RY_JBXX.rybm = ud.rybm;-->
+<!--    </update>-->
+
+
+    <!--    <select id="listSimple" resultType="com.lizy.rewritenew.entity.OriginSimple">-->
+<!--        select CAST(RIGHT(rybm, 4) AS INT) as sortNo,rybm as rybm,grj.dwbm,gdd.DWMC as dwbmStr,xm,sfzh-->
+<!--        from GZ_RY_JBXX grj left join GZ_DW_DWXX gdd on gdd.DWBM  = grj.DWBM-->
+<!--        where grj.ryzt in ('01','02') and grj.BZXZ in  ('01','02',' ')-->
+<!--        order by grj.rybm-->
+<!--    </select>-->
+
+
+    <select id="listSimple" resultType="com.lizy.rewritenew.entity.OriginSimple">
+        WITH RankedZW AS (
+            SELECT
+                grz.*,grj.SFZH,grj.xm,
+                ROW_NUMBER() OVER (PARTITION BY grz.RYBM ORDER BY grz.ZXSJ) AS rn
+            FROM
+                GZ_RY_ZW grz inner JOIN
+                GZ_RY_JBXX grj ON grj.rybm = grz.rybm and grj.ryzt in ('01','02',' ') and grj.BZXZ in  ('01','02',' ')
+        )
+        select grj.ryxh, grj.rybm as rybm,grj.dwbm,gdd.DWMC as dwbmStr,grj.xm,grj.sfzh,grj.csny,grj.cjgzsj,grj.jrdwsj,r1.srzwmc
+        from GZ_RY_JBXX grj left join GZ_DW_DWXX gdd on gdd.DWBM  = grj.DWBM
+                            left join RankedZW r1 on r1.rybm = grj.rybm and rn = 1
+        where grj.ryzt in ('01','02') and grj.BZXZ in  ('01','02',' ')
+        order by grj.rybm
+    </select>
+    <select id="listDistinctMc" resultType="java.lang.String">
+        select distinct srzwmc from GZ_RY_ZW
+    </select>
+
+
+</mapper>
