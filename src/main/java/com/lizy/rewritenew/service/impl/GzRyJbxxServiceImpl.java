@@ -1,6 +1,7 @@
 package com.lizy.rewritenew.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lizy.rewritenew.dto.NameValueDTO;
 import com.lizy.rewritenew.entity.GzRyJbxx;
 import com.lizy.rewritenew.entity.OriginSimple;
 import com.lizy.rewritenew.service.GzRyJbxxService;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author 67317
@@ -32,8 +34,23 @@ public class GzRyJbxxServiceImpl extends ServiceImpl<GzRyJbxxMapper, GzRyJbxx>
     }
 
     @Override
-    public List<String> listAllPositionName() {
+    public List<NameValueDTO> listAllPositionName() {
         return this.getBaseMapper().listDistinctMc();
+    }
+
+    @Override
+    public List<NameValueDTO> listAllSchoolName() {
+        return this.getBaseMapper().listAllSchoolName();
+    }
+
+    @Override
+    public List<NameValueDTO> listAllCryptPositionMap() {
+        return this.getBaseMapper().listAllCryptPositionMap();
+    }
+
+    @Override
+    public List<NameValueDTO> listAllCryptSchoolMap() {
+        return this.getBaseMapper().listAllCryptSchoolMap();
     }
 }
 

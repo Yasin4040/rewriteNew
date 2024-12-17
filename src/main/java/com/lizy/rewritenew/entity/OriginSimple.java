@@ -18,6 +18,10 @@ public class OriginSimple {
     private String jrdwsj;
     private String srzwmc;
 
+    private String firstSchool;
+    private String highestSchool;
+    private String highestDate;
+
     public String getUniqueKey(){
         String birthDate1 = this.csny.substring(0,6);
         String workStartDate1 = this.cjgzsj.substring(0,6);

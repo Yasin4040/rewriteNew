@@ -66,6 +66,9 @@ public class Employee {
     @ExcelProperty("应计学龄")
     private String calculatedEducationalAge;
 
+    @ExcelProperty("第一学历毕业院校")
+    private String firstSchool;
+
     @ExcelProperty("最高学历取得年月")
 //    @DateTimeFormat("yyyy-MM")
     private String highestEducationDate;
@@ -82,6 +85,8 @@ public class Employee {
 
     @ExcelProperty("最高学历学位")
     private String highestEducationDegree;
+    @ExcelProperty("最高学历毕业院校")
+    private String highestSchool;
 
     @ExcelProperty("职务名称")
     private String positionTitle;

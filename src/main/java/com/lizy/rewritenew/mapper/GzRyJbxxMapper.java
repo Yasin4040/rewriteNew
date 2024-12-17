@@ -1,11 +1,13 @@
 package com.lizy.rewritenew.mapper;
 
+import com.lizy.rewritenew.dto.NameValueDTO;
 import com.lizy.rewritenew.entity.GzRyJbxx;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lizy.rewritenew.entity.OriginSimple;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author 67317
@@ -22,7 +24,7 @@ public interface GzRyJbxxMapper extends BaseMapper<GzRyJbxx> {
      */
     List<OriginSimple> listSimple();
 
-    List<String> listDistinctMc();
+    List<NameValueDTO> listDistinctMc();
 
     /**
      * 更新id名称批处理
@@ -30,6 +32,12 @@ public interface GzRyJbxxMapper extends BaseMapper<GzRyJbxx> {
      * @param updateList 更新列表
      */
     void updateBatchForIdName(@Param("updateList") List<OriginSimple> updateList);
+
+    List<NameValueDTO> listAllSchoolName();
+
+    List<NameValueDTO> listAllCryptPositionMap();
+
+    List<NameValueDTO> listAllCryptSchoolMap();
 }
 
 
