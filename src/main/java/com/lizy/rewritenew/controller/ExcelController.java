@@ -38,11 +38,12 @@ public class ExcelController {
     private final GzRyJbxxService gzRyJbxxService;
 
     /**
-     * 处理上传的Excel文件并读取数据
+     * 直接使用excel更新姓名和身份证相关信息 处理加解密
      * @param file 上传的Excel文件
      * @return 操作结果
      */
     @PostMapping("/uploadExcel")
+    @Deprecated
     public String uploadExcel(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return "文件为空，请选择文件";
@@ -159,6 +160,12 @@ public class ExcelController {
     }
 
 
+    /**
+     *  在版本1上面优化！！！增加json文件，主要处理学校、职务信息的加解密
+     *
+     * @param file 文件
+     * @return {@link String }
+     */
     @PostMapping("/uploadExcel2")
     public String uploadExcel2(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
@@ -380,7 +387,12 @@ public class ExcelController {
     }
 
 
-
+    /**
+     * 填充json文件
+     *
+     * @param file 文件
+     * @return {@link String }
+     */
     @PostMapping("/practiceFromExcel")
     public String practiceFromExcel(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
@@ -481,6 +493,11 @@ public class ExcelController {
 
     }
 
+    /**
+     * 用json文件更新
+     *
+     * @return {@link String }
+     */
     @PostMapping("/updateForPositionAndSchool")
     public String updateForPositionAndSchool() {
 
