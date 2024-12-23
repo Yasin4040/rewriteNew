@@ -33,6 +33,8 @@ public interface GzRyJbxxMapper extends BaseMapper<GzRyJbxx> {
      */
     void updateBatchForIdName(@Param("updateList") List<OriginSimple> updateList);
 
+    void updateBatchForPosition(@Param("dtoList") List<NameValueDTO> dtoList);
+    void updateBatchForSchool(@Param("dtoList") List<NameValueDTO> dtoList);
     List<NameValueDTO> listAllSchoolName();
 
     List<NameValueDTO> listAllCryptPositionMap();

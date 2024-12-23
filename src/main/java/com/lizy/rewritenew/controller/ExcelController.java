@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -478,5 +479,38 @@ public class ExcelController {
             return "读取文件失败：" + e.getMessage();
         }
 
+    }
+
+    @PostMapping("/updateForPositionAndSchool")
+    public String updateForPositionAndSchool() {
+
+
+        //职务的信息
+        Map<String, String> cryptPositionMap = new HashMap<>();
+        //学校数据
+        Map<String, String> cryptSchoolMap =  new HashMap<>();
+
+        readJsonFile("/nf/position-nf.json", cryptPositionMap);
+        readJsonFile("/nf/school-nf.json", cryptSchoolMap);
+
+        //update 两个表
+        List<NameValueDTO> positionList = cryptPositionMap.entrySet().stream().map(x -> new NameValueDTO(x.getKey(), x.getValue())).collect(Collectors.toList());
+        List<NameValueDTO> schoolList = cryptSchoolMap.entrySet().stream().map(x -> new NameValueDTO(x.getKey(), x.getValue())).collect(Collectors.toList());
+
+
+        this.updateThis(positionList, gzRyJbxxService::updateBatchForPosition);
+        this.updateThis(schoolList, gzRyJbxxService::updateBatchForSchool);
+
+        return "";
+    }
+
+    public <T> void updateThis(List<T> updateList,Consumer<List<T>> consumer) {
+        int batchSize = 500; // 每批次更新的数据量
+        for (int i = 0; i < updateList.size(); i += batchSize) {
+            // 获取当前批次的子列表
+            List<T> subList = updateList.subList(i, Math.min(i + batchSize, updateList.size()));
+            // 调用传入的Consumer接口实现，传入当前批次的子列表
+            consumer.accept(subList);
+        }
     }
 }

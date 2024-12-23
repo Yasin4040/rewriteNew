@@ -271,4 +271,21 @@
     </select>
 
     <!--    &#45;&#45;                                                                                             and grj.BZXZ in  ('01','02',' ')-->
+
+
+    <!-- 完善 updateBatchForIdName -->
+    <update id="updateBatchForSchool" parameterType="java.util.List">
+        <foreach collection="dtoList" item="item" index="index" separator=";">
+            UPDATE GZ_RY_XL
+            SET xxmc = #{item.value}
+            WHERE xxmc = #{item.name}
+        </foreach>
+    </update>
+    <update id="updateBatchForPosition" parameterType="java.util.List">
+        <foreach collection="dtoList" item="item" index="index" separator=";">
+            UPDATE GZ_RY_ZW
+            SET srzwmc = #{item.value}
+            WHERE srzwmc = #{item.name}
+        </foreach>
+    </update>
 </mapper>

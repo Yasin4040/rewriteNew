@@ -53,4 +53,8 @@ public interface GzRyJbxxService extends IService<GzRyJbxx> {
      * @return {@link List }<{@link NameValueDTO }>
      */
     List<NameValueDTO> listAllCryptSchoolMap();
+
+    void updateBatchForSchool(List<NameValueDTO> dtoList);
+
+    void updateBatchForPosition(List<NameValueDTO> dtoList);
 }

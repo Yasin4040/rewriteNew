@@ -9,9 +9,7 @@ import com.lizy.rewritenew.mapper.GzRyJbxxMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
 * @author 67317
@@ -51,6 +49,16 @@ public class GzRyJbxxServiceImpl extends ServiceImpl<GzRyJbxxMapper, GzRyJbxx>
     @Override
     public List<NameValueDTO> listAllCryptSchoolMap() {
         return this.getBaseMapper().listAllCryptSchoolMap();
+    }
+
+    @Override
+    public void updateBatchForSchool(List<NameValueDTO> dtoList) {
+        this.getBaseMapper().updateBatchForSchool(dtoList);
+    }
+
+    @Override
+    public void updateBatchForPosition(List<NameValueDTO> dtoList) {
+        this.getBaseMapper().updateBatchForPosition(dtoList);
     }
 }
 
