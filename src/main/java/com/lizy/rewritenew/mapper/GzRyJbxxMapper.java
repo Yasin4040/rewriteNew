@@ -40,6 +40,13 @@ public interface GzRyJbxxMapper extends BaseMapper<GzRyJbxx> {
     List<NameValueDTO> listAllCryptPositionMap();
 
     List<NameValueDTO> listAllCryptSchoolMap();
+
+    /**
+     * 列出所有人
+     *
+     * @return {@link List }<{@link OriginSimple }>
+     */
+    List<OriginSimple> listAllPerson();
 }
 
 

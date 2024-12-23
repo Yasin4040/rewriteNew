@@ -26,6 +26,11 @@ public class GzRyJbxxServiceImpl extends ServiceImpl<GzRyJbxxMapper, GzRyJbxx>
     }
 
     @Override
+    public List<OriginSimple> listAllPerson() {
+        return this.getBaseMapper().listAllPerson();
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateBatchForIdName(List<OriginSimple> updateList) {
         this.getBaseMapper().updateBatchForIdName(updateList);

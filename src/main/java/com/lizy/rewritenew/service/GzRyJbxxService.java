@@ -22,6 +22,8 @@ public interface GzRyJbxxService extends IService<GzRyJbxx> {
      */
     List<OriginSimple> listSimple();
 
+    List<OriginSimple> listAllPerson();
+
     /**
      * 更新id名称批处理
      *

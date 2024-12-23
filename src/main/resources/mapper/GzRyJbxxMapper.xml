@@ -269,6 +269,63 @@
         select DISTINCT g1.XXMC as [name],g2.XXMC as [value] from [解密前-安福县].dbo.GZ_RY_XL g1 left join [安福县].dbo.GZ_RY_XL g2 on g1.RYBM = g2.rybm and g1.XLLSH = g2.XLLSH
         where g1.XXMC is not null and g1.XXMC != ''
     </select>
+    <select id="listAllPerson" resultType="com.lizy.rewritenew.entity.OriginSimple">
+        WITH RankedZW AS (
+            SELECT
+                grz.*, grj.SFZH, grj.xm,
+                ROW_NUMBER() OVER (PARTITION BY grz.RYBM ORDER BY grz.ZXSJ DESC) AS rn
+            FROM
+                GZ_RY_ZW grz
+                    left JOIN
+                GZ_RY_JBXX grj ON grj.rybm = grz.rybm
+        ),
+             RankedXL AS (
+                 SELECT
+                     grx.xlqdsj, grx.xxmc, grx.rybm,
+                     ROW_NUMBER() OVER (PARTITION BY grx.RYBM ORDER BY grx.XLQDSJ) AS rn
+                 FROM
+                     GZ_RY_XL grx
+                         left JOIN
+                     GZ_RY_JBXX grj ON grj.rybm = grx.rybm
+             ),
+             RankedXL2 AS (
+                 SELECT
+                     grx.xlqdsj, grx.xxmc, grx.rybm,
+                     ROW_NUMBER() OVER (PARTITION BY grx.RYBM ORDER BY grx.XLQDSJ desc) AS rn
+                 FROM
+                     GZ_RY_XL grx
+                         left JOIN
+                     GZ_RY_JBXX grj ON grj.rybm = grx.rybm
+             )
+        SELECT
+            grj.ryxh,
+            grj.rybm AS rybm,
+            grj.dwbm,
+            gdd.DWMC AS dwbmStr,
+            grj.xm,
+            grj.sfzh,
+            grj.csny,
+            grj.cjgzsj,
+            grj.jrdwsj,
+            r1.srzwmc,
+            r2.xxmc AS fisrtSchool,
+            r3.xxmc AS highestSchool,
+            r3.xlqdsj AS highestDate
+        FROM
+            GZ_RY_JBXX grj
+                LEFT JOIN
+            GZ_DW_DWXX gdd ON gdd.DWBM = grj.DWBM
+                LEFT JOIN
+            RankedZW r1 ON r1.rybm = grj.rybm AND r1.rn = 1
+                LEFT JOIN
+            RankedXL r2 ON r2.rybm = grj.rybm AND r2.rn = 1
+                LEFT JOIN
+            RankedXL2 r3 ON r3.rybm = grj.rybm AND r3.rn = 1
+        WHERE
+            1=1
+        ORDER BY
+            grj.rybm;
+    </select>
 
     <!--    &#45;&#45;                                                                                             and grj.BZXZ in  ('01','02',' ')-->
 

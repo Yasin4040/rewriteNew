@@ -162,7 +162,7 @@ public class ExcelController {
 
             log.info("还有{}条职务加密数据还没有解决",remainPositionNameMap.size());
             log.info("还有{}条学校加密数据还没有解决",remainSchoolNameMap.size());
-//            this.updateThis(updateList);
+            this.updateThis(updateList);
             log.info("更新数据，共更新{}条数据",updateList.size());
             return "success";
         } catch (Exception e) {
@@ -251,25 +251,13 @@ public class ExcelController {
                 }
                 simple.setSfzh(employee.getIdNumber());
                 simple.setXm(employee.getName());
-//                if (StrUtil.startWith(simple.getSrzwmc(),"d")) {
-//                    positionNameMap.put(simple.getSrzwmc(),simple.getXm()+":"+employee.getPositionTitle());
-//                }
-//                if (StrUtil.startWith(simple.getFirstSchool(),"d")) {
-//                    schoolNameMap.put(simple.getFirstSchool(),simple.getXm()+":"+employee.getFirstSchool());
-//                }
-//                if (StrUtil.startWith(simple.getHighestSchool(),"d")) {
-//                    schoolNameMap.put(simple.getHighestSchool(),simple.getXm()+":"+employee.getHighestSchool());
-//                }
                 updateList.add(simple);
             }
             //将json转hashmap
 
-//            schoolNameMap = readJsonFile("school-nc.json");
-//            positionNameMap = readJsonFile("/position-nc.json");
+
             schoolNameMap = readJsonFile("xdq-1223/school-xdq.json");
             positionNameMap = readJsonFile("xdq-1223/position-xdq.json");
-//            String jsonString = JSON.toJSONString(positionNameMap);
-//            String jsonString2 = JSON.toJSONString(schoolNameMap);
             //职务的信息
             List<NameValueDTO> allCryptPositionName = gzRyJbxxService.listAllPositionName();
             //学校
@@ -423,62 +411,37 @@ public class ExcelController {
             // 获取解析后的数据列表
             List<Employee> employeeList = listener.getEmployeeList();
             log.info("文件读取成功，共解析到{}条数据",employeeList.size());
-            // 这里可以进行其他操作，例如保存到数据库
-            // 用于存储重复的Employee对象
-            List<Employee> duplicateEmployees = new ArrayList<>();
-
-            // 使用Stream API来检测和收集重复的Employee对象
-            Map<String, Long> employeeCountMap = employeeList.stream()
-                    .collect(Collectors.groupingBy(
-                            Employee::getUniqueKey,
-                            Collectors.counting() // 计算每个组的大小
-                    ));
-
-            // 找出重复的Employee对象
-            employeeCountMap.forEach((key, count) -> {
-                if (count > 1) { // 如果某个key出现超过一次，则认为是重复的
-                    // 从原始列表中找出所有具有该key的Employee对象
-                    List<Employee> duplicates = employeeList.stream()
-                            .filter(e -> (e.getUniqueKey()).equals(key))
-                            .collect(Collectors.toList());
-                    duplicateEmployees.addAll(duplicates); // 将重复的Employee对象添加到列表中
-                    System.out.println("Found duplicates for key: " + key + ", Employees: " + duplicates);
-                }
-            });
-
-            employeeList.removeAll(duplicateEmployees);
 
             Map<String, Employee> employeeMap = employeeList.stream().collect(Collectors.toMap(Employee::getUniqueKey, Function.identity()));
             log.info("转换map的keys数量：{}",employeeMap.keySet().size());
             //获取excel
-            List<OriginSimple> simples = gzRyJbxxService.listSimple();
+            List<OriginSimple> allPerson = gzRyJbxxService.listSimple();
             // 用于存储不在simples列表中的Employee数据
 
-            HashMap<String, String> positionNameMap = new HashMap<>();
-            HashMap<String, String> schoolNameMap = new HashMap<>();
+            HashMap<String, String> positionNameMap = new LinkedHashMap<>();
+            HashMap<String, String> schoolNameMap = new LinkedHashMap<>();
 
-            HashMap<String, String> remainPositionNameMap = new HashMap<>();
-            HashMap<String, String> remainSchoolNameMap = new HashMap<>();
             List<OriginSimple> updateList = new ArrayList<>();
-            for (OriginSimple simple : simples) {
+            for (OriginSimple simple : allPerson) {
                 String uniqueKey = simple.getUniqueKey();
                 Employee employee = employeeMap.get(uniqueKey);
                 if (employee == null) {
                     log.info("失败的key{}",uniqueKey);
                     continue;
                 }
-                simple.setSfzh(employee.getIdNumber());
-                simple.setXm(employee.getName());
                 if (StrUtil.startWith(simple.getSrzwmc(),"d")) {
                     positionNameMap.put(simple.getSrzwmc(),employee.getPositionTitle());
                 }
                 if (StrUtil.startWith(simple.getFirstSchool(),"d")) {
-                    schoolNameMap.put(simple.getFirstSchool(),employee.getFirstSchool());
+                    if(StrUtil.isNotBlank(employee.getFirstSchool())){
+                        schoolNameMap.put(simple.getFirstSchool(),employee.getFirstSchool());
+                    }
                 }
                 if (StrUtil.startWith(simple.getHighestSchool(),"d")) {
-                    schoolNameMap.put(simple.getHighestSchool(),employee.getHighestSchool());
+                    if(StrUtil.isNotBlank(employee.getHighestSchool())){
+                        schoolNameMap.put(simple.getHighestSchool(),employee.getHighestSchool());
+                    }
                 }
-                updateList.add(simple);
             }
             //将json转hashmap
             readJsonFile("nf/school-nf.json", schoolNameMap);
@@ -486,10 +449,8 @@ public class ExcelController {
             String jsonString = JSON.toJSONString(positionNameMap);
             String jsonString2 = JSON.toJSONString(schoolNameMap);
 
-
             //获取父路径
             File file2 = readJsonFileDir("position-nc.json");
-
             // 写入 jsonString 到 position-nf.json
             File positionFile = new File(file2.getParent(),"/position-xdq.json");
             Files.write(positionFile.toPath(), jsonString.getBytes());
@@ -498,9 +459,6 @@ public class ExcelController {
             File schoolFile = new File(file2.getParent(),"/school-xdq.json");
             Files.write(schoolFile.toPath(), jsonString2.getBytes());
 
-//            log.info("还有{}条职务加密数据还没有解决",remainPositionNameMap.size());
-//            log.info("还有{}条学校加密数据还没有解决",remainSchoolNameMap.size());
-//            this.updateThis(updateList);
             log.info("一共{}条数据",updateList.size());
             return "success";
         } catch (Exception e) {
