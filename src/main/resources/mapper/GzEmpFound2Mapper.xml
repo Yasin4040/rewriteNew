@@ -200,6 +200,8 @@
             RankedXL r2 ON r2.EMPLOYEEID = grj.EMPLOYEEID AND r2.rn = 1
                 LEFT JOIN
             RankedXL2 r3 ON r3.EMPLOYEEID = grj.EMPLOYEEID AND r3.rn = 1
+
+        where grj.STATE = '01'
         ORDER BY
             grj.EMPLOYEEID;
     </select>

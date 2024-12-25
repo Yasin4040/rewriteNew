@@ -27,6 +27,6 @@ public class LowOriginSimple {
         String birthDate1 = this.birthday.substring(0,6);
         String workStartDate1 = this.workTime.substring(0,6);
         String entryDate1 = this.enterTime.substring(0,6);
-        return StrUtil.join(":", this.unitName, this.renySort, birthDate1, workStartDate1, entryDate1);
+        return StrUtil.join(":", this.unitName.trim(), this.renySort.trim(), birthDate1.trim(), workStartDate1.trim(), entryDate1.trim());
     }
 }

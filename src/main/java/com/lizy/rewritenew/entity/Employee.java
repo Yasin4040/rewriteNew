@@ -15,8 +15,11 @@ public class Employee {
     @ExcelProperty("人员序号")
     private String personnelNumber;
 
-    @ExcelProperty("单位")
+    @ExcelProperty("单位名称")
     private String unit;
+
+    @ExcelProperty("部门")
+    private String department;
 
     @ExcelProperty("姓名")
     private String name;
@@ -34,11 +37,11 @@ public class Employee {
 //    @DateTimeFormat("yyyy-MM")
     private String birthDate;
 
-    @ExcelProperty("参加工作年月")
+    @ExcelProperty("参加工作时间")
 //    @DateTimeFormat("yyyy-MM")
     private String workStartDate;
 
-    @ExcelProperty("进入单位年月")
+    @ExcelProperty("进入单位时间")
 //    @DateTimeFormat("yyyy-MM")
     private String entryDate;
 
@@ -128,9 +131,27 @@ public class Employee {
     // ...
 
     public String getUniqueKey() {
-        String birthDate1 = this.getBirthDate().replace("-", "");
-        String workStartDate1 = this.getWorkStartDate().replace("-", "");
-        String entryDate1 = this.getEntryDate().replace("-", "");
-        return StrUtil.join(":", this.unit, this.personnelNumber, birthDate1, workStartDate1, entryDate1);
+        String birthDate1 = "";
+        if(StrUtil.isNotBlank(this.getBirthDate())){
+            birthDate1 = this.getBirthDate().replace("-", "").trim();
+        }
+        String workStartDate1 = "";
+        if(StrUtil.isNotBlank(this.getWorkStartDate())){
+            workStartDate1 = this.getWorkStartDate().replace("-", "").trim();
+        }
+        String entryDate1 = "";
+        if(StrUtil.isNotBlank(this.getEntryDate())){
+            entryDate1 = this.getEntryDate().replace("-", "").trim();
+        }
+        String unit1 = "";
+        if(StrUtil.isNotBlank(this.unit)){
+            unit1 = this.unit.trim();
+        }
+        String personnelNumber1 = "";
+        if(StrUtil.isNotBlank(this.personnelNumber)){
+            personnelNumber1 = personnelNumber.trim();
+        }
+
+        return StrUtil.join(":", unit1, personnelNumber1, birthDate1, workStartDate1, entryDate1);
     }
 }

@@ -91,7 +91,14 @@ public class LowExcelController {
                     .collect(Collectors.toSet());
 
             List<Employee> notInSimplesList = employeeList.stream()
-                    .filter(employee -> !simpleUniqueKeys.contains(employee.getUniqueKey()))
+                    .filter(employee ->{
+                        if (!simpleUniqueKeys.contains(employee.getUniqueKey())) {
+
+                            log.info(employee.getUniqueKey());
+                            return true;
+                        }
+                        return false;
+                    } )
                     .collect(Collectors.toList());
             log.info("数据库不存在的人员数据{}",notInSimplesList.size());
 
