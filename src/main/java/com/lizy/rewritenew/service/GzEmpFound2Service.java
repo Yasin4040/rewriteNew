@@ -30,40 +30,4 @@ public interface GzEmpFound2Service extends IService<GzEmpFound2> {
      */
     void updateBatchForIdName(List<LowOriginSimple> updateList);
 
-    List<NameValueDTO> listAllPositionName();
-
-    /**
-     * 列出所有学校名称
-     *
-     * @return {@link List }<{@link String }>
-     */
-    List<NameValueDTO> listAllSchoolName();
-
-    /**
-     * 列出所有学校名称
-     *
-     * @return {@link List }<{@link String }>
-     */
-    List<NameValueDTO> listAllSchoolFirstName();
-
-
-    /**
-     * 列出所有地穴位置图
-     *
-     * @return {@link List }<{@link NameValueDTO }>
-     */
-    List<NameValueDTO> listAllCryptPositionMap();
-
-
-    /**
-     * 列出所有地穴学校地图
-     *
-     * @return {@link List }<{@link NameValueDTO }>
-     */
-    List<NameValueDTO> listAllCryptSchoolMap();
-
-    void updateBatchForSchool(List<NameValueDTO> dtoList);
-
-    void updateBatchForPosition(List<NameValueDTO> dtoList);
-
 }

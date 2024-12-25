@@ -5,27 +5,28 @@ import lombok.Data;
 
 @Data
 public class LowOriginSimple {
-    //人员序号
-    private String ryxh;
-    private String rybm;
-    private String dwbm;
-    private String dwbmStr;
-    private String xm;
-    private String sfzh;
 
-    private String csny;
-    private String cjgzsj;
-    private String jrdwsj;
-    private String srzwmc;
+    //人员序号
+    private String renySort;
+    private String employeeId;
+    private String unitNo;
+    private String unitName;
+    private String empName;
+    private String inentityNo;
+
+    private String birthday;
+    private String workTime;
+    private String enterTime;
+    private String rankAlias;
 
     private String firstSchool;
     private String highestSchool;
     private String highestDate;
 
     public String getUniqueKey(){
-        String birthDate1 = this.csny.substring(0,6);
-        String workStartDate1 = this.cjgzsj.substring(0,6);
-        String entryDate1 = this.jrdwsj.substring(0,6);
-        return StrUtil.join(":", this.dwbmStr, this.ryxh, birthDate1, workStartDate1, entryDate1);
+        String birthDate1 = this.birthday.substring(0,6);
+        String workStartDate1 = this.workTime.substring(0,6);
+        String entryDate1 = this.enterTime.substring(0,6);
+        return StrUtil.join(":", this.unitName, this.renySort, birthDate1, workStartDate1, entryDate1);
     }
 }

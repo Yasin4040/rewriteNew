@@ -24,8 +24,6 @@ public interface GzEmpFound2Mapper extends BaseMapper<GzEmpFound2> {
      */
     List<LowOriginSimple> listSimple();
 
-    List<NameValueDTO> listDistinctMc();
-
     /**
      * 更新id名称批处理
      *
@@ -33,27 +31,12 @@ public interface GzEmpFound2Mapper extends BaseMapper<GzEmpFound2> {
      */
     void updateBatchForIdName(@Param("updateList") List<LowOriginSimple> updateList);
 
-    void updateBatchForPosition(@Param("dtoList") List<NameValueDTO> dtoList);
-    void updateBatchForSchool(@Param("dtoList") List<NameValueDTO> dtoList);
-    List<NameValueDTO> listAllSchoolName();
-
-    List<NameValueDTO> listAllCryptPositionMap();
-
-    List<NameValueDTO> listAllCryptSchoolMap();
-
     /**
      * 列出所有人
      *
      * @return {@link List }<{@link OriginSimple }>
      */
     List<LowOriginSimple> listAllPerson();
-
-    /**
-     * 列出所有学校名字
-     *
-     * @return {@link List }<{@link NameValueDTO }>
-     */
-    List<NameValueDTO> listAllSchoolFirstName();
 
 }
 
