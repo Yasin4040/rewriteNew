@@ -151,59 +151,57 @@
     <select id="listSimple" resultType="com.lizy.rewritenew.entity.LowOriginSimple">
         WITH RankedZW AS (
             SELECT
-                grz.*, grj.SFZH, grj.xm,
-                ROW_NUMBER() OVER (PARTITION BY grz.RYBM ORDER BY grz.ZXSJ DESC) AS rn
+                grz.*, grj.INENTITY_NO, grj.EMPNAME,
+                ROW_NUMBER() OVER (PARTITION BY grz.EMPLOYEEID ORDER BY grz.ASSIGN_DATE DESC) AS rn
             FROM
-                GZ_RY_ZW grz
+                GZ_EMP_RANK2 grz
                     left JOIN
-                GZ_RY_JBXX grj ON grj.rybm = grz.rybm AND grj.ryzt IN ('01', '02')
+                GZ_EMP_FOUND2 grj ON grj.EMPLOYEEID = grz.EMPLOYEEID
         ),
              RankedXL AS (
                  SELECT
-                     grx.xlqdsj, grx.xxmc, grx.rybm,
-                     ROW_NUMBER() OVER (PARTITION BY grx.RYBM ORDER BY grx.XLQDSJ) AS rn
+                     grx.GETDATE, grx.SCHOOLNAME, grx.EMPLOYEEID,
+                     ROW_NUMBER() OVER (PARTITION BY grx.EMPLOYEEID ORDER BY grx.GETDATE) AS rn
                  FROM
-                     GZ_RY_XL grx
+                     GZ_EMP_EDUCATION2 grx
                          left JOIN
-                     GZ_RY_JBXX grj ON grj.rybm = grx.rybm AND grj.ryzt IN ('01', '02')
+                     GZ_EMP_FOUND2 grj ON grj.EMPLOYEEID = grx.EMPLOYEEID
              ),
              RankedXL2 AS (
                  SELECT
-                     grx.xlqdsj, grx.xxmc, grx.rybm,
-                     ROW_NUMBER() OVER (PARTITION BY grx.RYBM ORDER BY grx.XLQDSJ desc) AS rn
+                     grx.GETDATE, grx.SCHOOLNAME, grx.EMPLOYEEID,
+                     ROW_NUMBER() OVER (PARTITION BY grx.EMPLOYEEID ORDER BY grx.GETDATE desc) AS rn
                  FROM
-                     GZ_RY_XL grx
+                     GZ_EMP_EDUCATION2 grx
                          left JOIN
-                     GZ_RY_JBXX grj ON grj.rybm = grx.rybm AND grj.ryzt IN ('01', '02')
+                     GZ_EMP_FOUND2 grj ON grj.EMPLOYEEID = grx.EMPLOYEEID
              )
         SELECT
-            grj.ryxh,
-            grj.rybm AS rybm,
-            grj.dwbm,
-            gdd.DWMC AS dwbmStr,
-            grj.xm,
-            grj.sfzh,
-            grj.csny,
-            grj.cjgzsj,
-            grj.jrdwsj,
-            r1.srzwmc,
-            r2.xxmc AS fisrtSchool,
-            r3.xxmc AS highestSchool,
-            r3.xlqdsj AS highestDate
+            grj.reny_sort AS renySort,
+            grj.EMPLOYEEID AS employeeId,
+            grj.unitno AS unitNo,
+            gdd.UNITNAME AS unitName,
+            grj.EMPNAME AS empName,
+            grj.INENTITY_NO AS inetityNo,
+            grj.BIRTHDAY AS birthday,
+            grj.WORKTIME AS workTime,
+            grj.ENTERTIME AS enterTime,
+            r1.RANKALIAS as rankAlias,
+            r2.SCHOOLNAME AS fisrtSchool,
+            r3.SCHOOLNAME AS highestSchool,
+            r3.GETDATE AS highestDate
         FROM
-            GZ_RY_JBXX grj
+            GZ_EMP_FOUND2 grj
                 LEFT JOIN
-            GZ_DW_DWXX gdd ON gdd.DWBM = grj.DWBM
+            GZ_SYS_UNIT gdd ON gdd.UNITNO = grj.unitno
                 LEFT JOIN
-            RankedZW r1 ON r1.rybm = grj.rybm AND r1.rn = 1
+            RankedZW r1 ON r1.EMPLOYEEID = grj.EMPLOYEEID AND r1.rn = 1
                 LEFT JOIN
-            RankedXL r2 ON r2.rybm = grj.rybm AND r2.rn = 1
+            RankedXL r2 ON r2.EMPLOYEEID = grj.EMPLOYEEID AND r2.rn = 1
                 LEFT JOIN
-            RankedXL2 r3 ON r3.rybm = grj.rybm AND r3.rn = 1
-        WHERE
-            grj.ryzt IN ('01', '02')
+            RankedXL2 r3 ON r3.EMPLOYEEID = grj.EMPLOYEEID AND r3.rn = 1
         ORDER BY
-            grj.rybm;
+            grj.EMPLOYEEID;
     </select>
     <select id="listAllPerson" resultType="com.lizy.rewritenew.entity.LowOriginSimple">
         WITH RankedZW AS (
@@ -272,4 +270,48 @@
             WHERE EMPLOYEEID = #{item.employeeId}
         </foreach>
     </update>
+
+<!--    &lt;!&ndash; 完善 updateBatchForIdName &ndash;&gt;-->
+<!--    <update id="updateBatchForSchool" parameterType="java.util.List">-->
+<!--        <foreach collection="dtoList" item="item" index="index" separator=";">-->
+<!--            UPDATE GZ_EMP_EDUCATION2-->
+<!--            SET SCHOOLNAME = #{item.value}-->
+<!--            WHERE SCHOOLNAME = #{item.name}-->
+<!--        </foreach>-->
+<!--    </update>-->
+<!--    <update id="updateBatchForPosition" parameterType="java.util.List">-->
+<!--        <foreach collection="dtoList" item="item" index="index" separator=";">-->
+<!--            UPDATE GZ_EMP_RANK2-->
+<!--            SET RANKALIAS = #{item.value}-->
+<!--            WHERE RANKALIAS = #{item.name}-->
+<!--        </foreach>-->
+<!--    </update>-->
+
+
+<!--    <select id="listDistinctMc" resultType="com.lizy.rewritenew.dto.NameValueDTO">-->
+<!--        select distinct RANKALIAS as value,gdd.UNITNAME+':' +grj.EMPNAME as name from GZ_EMP_RANK2 zw-->
+<!--            left join GZ_EMP_FOUND2 grj on zw.EMPLOYEEID = grj.EMPLOYEEID-->
+<!--            LEFT JOIN GZ_SYS_UNIT gdd ON gdd.unitno = grj.unitno-->
+<!--        where grj.STATE in ('01','02')   and left(zw.RANKALIAS,1)='d'-->
+<!--    </select>-->
+<!--    <select id="listAllSchoolName" resultType="com.lizy.rewritenew.dto.NameValueDTO">-->
+<!--        select distinct grx.SCHOOLNAME as value,gdd.unitname+':' +grj.empname as name from GZ_EMP_EDUCATION2 grx-->
+<!--            left join GZ_EMP_FOUND2 grj on grx.EMPLOYEEID = grj.EMPLOYEEID-->
+<!--            LEFT JOIN GZ_SYS_UNIT gdd ON gdd.unitno = grj.unitno-->
+<!--        where grj.STATE in ('01','02') and left(SCHOOLNAME,1)='d'-->
+<!--    </select>-->
+<!--    <select id="listAllSchoolFirstName" resultType="com.lizy.rewritenew.dto.NameValueDTO">-->
+<!--        WITH CTE AS (-->
+<!--            SELECT grx.SCHOOLNAME AS value,-->
+<!--            gdd.unitname + ':' + grj.empname AS name,-->
+<!--            ROW_NUMBER() OVER(PARTITION BY grx.SCHOOLNAME ORDER BY grx.SCHOOLNAME) AS rn-->
+<!--        FROM GZ_EMP_EDUCATION2 grx-->
+<!--            LEFT JOIN GZ_EMP_FOUND2 grj ON grx.EMPLOYEEID = grj.EMPLOYEEID-->
+<!--            LEFT JOIN GZ_SYS_UNIT gdd ON gdd.unitno = grj.unitno-->
+<!--        WHERE grj.STATE IN ('01', '02') AND LEFT(SCHOOLNAME, 1) = 'd'-->
+<!--            )-->
+<!--        SELECT value, name-->
+<!--        FROM CTE-->
+<!--        WHERE rn = 1;-->
+<!--    </select>-->
 </mapper>

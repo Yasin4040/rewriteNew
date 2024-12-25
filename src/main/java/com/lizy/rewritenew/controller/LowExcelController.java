@@ -105,8 +105,8 @@ public class LowExcelController {
                     noInEmployeeList.add(simple);
                     continue;
                 }
-                simple.setSfzh(employee.getIdNumber());
-                simple.setXm(employee.getName());
+                simple.setInentityNo(employee.getIdNumber());
+                simple.setEmpName(employee.getName());
                 updateList.add(simple);
             }
             this.updateThis(updateList);
