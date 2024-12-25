@@ -40,6 +40,13 @@ public interface GzRyJbxxService extends IService<GzRyJbxx> {
      */
     List<NameValueDTO> listAllSchoolName();
 
+    /**
+     * 列出所有学校名称
+     *
+     * @return {@link List }<{@link String }>
+     */
+    List<NameValueDTO> listAllSchoolFirstName();
+
 
     /**
      * 列出所有地穴位置图

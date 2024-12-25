@@ -119,13 +119,13 @@ public class ExcelController {
                     positionNameMap.put(simple.getSrzwmc(),employee.getPositionTitle());
                 }
                 //存进去的 第一学校
-                if (StrUtil.startWith(simple.getFirstSchool(),"d")) {
-                    schoolNameMap.put(simple.getFirstSchool(),employee.getFirstSchool());
+                if (StrUtil.startWith(simple.getHighestSchool(),"d")) {
+                    schoolNameMap.put(simple.getHighestSchool(),employee.getFirstSchool());
                 }
                 //存进去的 最高学校
-                if (StrUtil.startWith(simple.getHighestSchool(),"d")) {
-                    schoolNameMap.put(simple.getHighestSchool(),employee.getHighestSchool());
-                }
+//                if (StrUtil.startWith(simple.getHighestSchool(),"d")) {
+//                    schoolNameMap.put(simple.getHighestSchool(),employee.getHighestSchool());
+//                }
 //                if (StrUtil.startWith(simple.getSrzwmc(),"d")) {
 //                    positionNameMap.put(simple.getSrzwmc(),simple.getXm()+":"+employee.getPositionTitle());
 //                }
@@ -162,7 +162,7 @@ public class ExcelController {
 
             log.info("还有{}条职务加密数据还没有解决",remainPositionNameMap.size());
             log.info("还有{}条学校加密数据还没有解决",remainSchoolNameMap.size());
-            this.updateThis(updateList);
+//            this.updateThis(updateList);
             log.info("更新数据，共更新{}条数据",updateList.size());
             return "success";
         } catch (Exception e) {
@@ -261,7 +261,7 @@ public class ExcelController {
             //职务的信息
             List<NameValueDTO> allCryptPositionName = gzRyJbxxService.listAllPositionName();
             //学校
-            List<NameValueDTO> allCryptSchoolName = gzRyJbxxService.listAllSchoolName();
+            List<NameValueDTO> allCryptSchoolName = gzRyJbxxService.listAllSchoolFirstName();
 //            //有多少map
 //            List<String> remainPositionList = new ArrayList<>();
 //            List<String> remainSchoolList = new ArrayList<>();
@@ -276,7 +276,8 @@ public class ExcelController {
                     remainSchoolNameMap.put(x.getName(), x.getValue());
                 }
             }
-
+            String jsonString = JSON.toJSONString(positionNameMap);
+            String jsonString2 = JSON.toJSONString(remainSchoolNameMap);
             log.info("还有{}条职务加密数据还没有解决",remainPositionNameMap.size());
             log.info("还有{}条学校加密数据还没有解决",remainSchoolNameMap.size());
 //            this.updateThis(updateList);
@@ -438,25 +439,31 @@ public class ExcelController {
                     }
                 }
                 if (StrUtil.startWith(simple.getHighestSchool(),"d")) {
-                    if(StrUtil.isNotBlank(employee.getHighestSchool())){
-                        schoolNameMap.put(simple.getHighestSchool(),employee.getHighestSchool());
+                    if(StrUtil.isNotBlank(employee.getFirstSchool())){
+                        schoolNameMap.put(simple.getHighestSchool(),employee.getFirstSchool());
                     }
                 }
+//                if (StrUtil.startWith(simple.getHighestSchool(),"d")) {
+//                    if(StrUtil.isNotBlank(employee.getHighestSchool())){
+//                        schoolNameMap.put(simple.getHighestSchool(),employee.getHighestSchool());
+//                    }
+//                }
             }
+            log.info(String.valueOf(schoolNameMap.size()));
             //将json转hashmap
             readJsonFile("nf/school-nf.json", schoolNameMap);
             readJsonFile("nf/position-nf.json", positionNameMap);
             String jsonString = JSON.toJSONString(positionNameMap);
             String jsonString2 = JSON.toJSONString(schoolNameMap);
-
+            log.info("2{}",String.valueOf(schoolNameMap.size()));
             //获取父路径
             File file2 = readJsonFileDir("position-nc.json");
             // 写入 jsonString 到 position-nf.json
-            File positionFile = new File(file2.getParent(),"/position-xdq.json");
+            File positionFile = new File(file2.getParent(),"/position-**.json");
             Files.write(positionFile.toPath(), jsonString.getBytes());
 
             // 写入 jsonString2 到 school-nf.json
-            File schoolFile = new File(file2.getParent(),"/school-xdq.json");
+            File schoolFile = new File(file2.getParent(),"/school-**.json");
             Files.write(schoolFile.toPath(), jsonString2.getBytes());
 
             log.info("一共{}条数据",updateList.size());
@@ -482,8 +489,8 @@ public class ExcelController {
         //学校数据
         Map<String, String> cryptSchoolMap =  new HashMap<>();
 
-        readJsonFile("/nf/position-nf.json", cryptPositionMap);
-        readJsonFile("/nf/school-nf.json", cryptSchoolMap);
+        readJsonFile("xdq-1223/position-xdq.json", cryptPositionMap);
+        readJsonFile("xdq-1223/school-xdq.json", cryptSchoolMap);
 
         //update 两个表
         List<NameValueDTO> positionList = cryptPositionMap.entrySet().stream().map(x -> new NameValueDTO(x.getKey(), x.getValue())).collect(Collectors.toList());

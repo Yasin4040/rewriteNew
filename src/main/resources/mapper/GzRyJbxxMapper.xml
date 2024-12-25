@@ -261,6 +261,21 @@
         LEFT JOIN GZ_DW_DWXX gdd ON gdd.DWBM = grj.DWBM
         where grj.ryzt in ('01','02') and left(xxmc,1)='d'
     </select>
+    <select id="listAllSchoolFirstName" resultType="com.lizy.rewritenew.dto.NameValueDTO">
+        WITH CTE AS (
+            SELECT grx.XXMC AS value,
+            gdd.dwmc + ':' + grj.xm AS name,
+            ROW_NUMBER() OVER(PARTITION BY grx.XXMC ORDER BY grx.XXMC) AS rn
+        FROM GZ_RY_XL grx
+            LEFT JOIN GZ_RY_JBXX grj ON grx.rybm = grj.rybm
+            LEFT JOIN GZ_DW_DWXX gdd ON gdd.DWBM = grj.DWBM
+        WHERE grj.ryzt IN ('01', '02') AND LEFT(xxmc, 1) = 'd'
+            )
+        SELECT value, name
+        FROM CTE
+        WHERE rn = 1;
+    </select>
+
     <select id="listAllCryptPositionMap" resultType="com.lizy.rewritenew.dto.NameValueDTO">
         select DISTINCT g1.srzwmc as [name],g2.srzwmc as [value] from [解密前-安福县].dbo.GZ_RY_ZW g1 left join [安福县].dbo.GZ_RY_ZW g2 on g1.RYBM = g2.rybm and g1.ZWJLLSH = g2.ZWJLLSH
         where g1.srzwmc is not null and g1.srzwmc != ''

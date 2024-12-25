@@ -47,6 +47,13 @@ public interface GzRyJbxxMapper extends BaseMapper<GzRyJbxx> {
      * @return {@link List }<{@link OriginSimple }>
      */
     List<OriginSimple> listAllPerson();
+
+    /**
+     * 列出所有学校名字
+     *
+     * @return {@link List }<{@link NameValueDTO }>
+     */
+    List<NameValueDTO> listAllSchoolFirstName();
 }
 
 

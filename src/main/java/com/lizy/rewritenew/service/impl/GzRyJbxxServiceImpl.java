@@ -47,6 +47,13 @@ public class GzRyJbxxServiceImpl extends ServiceImpl<GzRyJbxxMapper, GzRyJbxx>
     }
 
     @Override
+    public List<NameValueDTO> listAllSchoolFirstName() {
+        return this.getBaseMapper().listAllSchoolFirstName();
+    }
+
+
+
+    @Override
     public List<NameValueDTO> listAllCryptPositionMap() {
         return this.getBaseMapper().listAllCryptPositionMap();
     }
