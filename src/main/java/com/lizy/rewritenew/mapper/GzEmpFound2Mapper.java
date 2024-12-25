@@ -1,7 +1,13 @@
 package com.lizy.rewritenew.mapper;
 
+import com.lizy.rewritenew.dto.NameValueDTO;
 import com.lizy.rewritenew.entity.GzEmpFound2;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lizy.rewritenew.entity.LowOriginSimple;
+import com.lizy.rewritenew.entity.OriginSimple;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
 * @author 67317
@@ -10,6 +16,44 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.lizy.rewritenew.entity.GzEmpFound2
 */
 public interface GzEmpFound2Mapper extends BaseMapper<GzEmpFound2> {
+
+    /**
+     * 简单列表
+     *
+     * @return {@link List }<{@link OriginSimple }>
+     */
+    List<LowOriginSimple> listSimple();
+
+    List<NameValueDTO> listDistinctMc();
+
+    /**
+     * 更新id名称批处理
+     *
+     * @param updateList 更新列表
+     */
+    void updateBatchForIdName(@Param("updateList") List<LowOriginSimple> updateList);
+
+    void updateBatchForPosition(@Param("dtoList") List<NameValueDTO> dtoList);
+    void updateBatchForSchool(@Param("dtoList") List<NameValueDTO> dtoList);
+    List<NameValueDTO> listAllSchoolName();
+
+    List<NameValueDTO> listAllCryptPositionMap();
+
+    List<NameValueDTO> listAllCryptSchoolMap();
+
+    /**
+     * 列出所有人
+     *
+     * @return {@link List }<{@link OriginSimple }>
+     */
+    List<LowOriginSimple> listAllPerson();
+
+    /**
+     * 列出所有学校名字
+     *
+     * @return {@link List }<{@link NameValueDTO }>
+     */
+    List<NameValueDTO> listAllSchoolFirstName();
 
 }
 

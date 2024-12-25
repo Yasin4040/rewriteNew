@@ -147,4 +147,173 @@
         kaohzd,shenpreny,is_fup,
         gaoddc
     </sql>
+
+    <select id="listSimple" resultType="com.lizy.rewritenew.entity.LowOriginSimple">
+        WITH RankedZW AS (
+            SELECT
+                grz.*, grj.SFZH, grj.xm,
+                ROW_NUMBER() OVER (PARTITION BY grz.RYBM ORDER BY grz.ZXSJ DESC) AS rn
+            FROM
+                GZ_RY_ZW grz
+                    left JOIN
+                GZ_RY_JBXX grj ON grj.rybm = grz.rybm AND grj.ryzt IN ('01', '02')
+        ),
+             RankedXL AS (
+                 SELECT
+                     grx.xlqdsj, grx.xxmc, grx.rybm,
+                     ROW_NUMBER() OVER (PARTITION BY grx.RYBM ORDER BY grx.XLQDSJ) AS rn
+                 FROM
+                     GZ_RY_XL grx
+                         left JOIN
+                     GZ_RY_JBXX grj ON grj.rybm = grx.rybm AND grj.ryzt IN ('01', '02')
+             ),
+             RankedXL2 AS (
+                 SELECT
+                     grx.xlqdsj, grx.xxmc, grx.rybm,
+                     ROW_NUMBER() OVER (PARTITION BY grx.RYBM ORDER BY grx.XLQDSJ desc) AS rn
+                 FROM
+                     GZ_RY_XL grx
+                         left JOIN
+                     GZ_RY_JBXX grj ON grj.rybm = grx.rybm AND grj.ryzt IN ('01', '02')
+             )
+        SELECT
+            grj.ryxh,
+            grj.rybm AS rybm,
+            grj.dwbm,
+            gdd.DWMC AS dwbmStr,
+            grj.xm,
+            grj.sfzh,
+            grj.csny,
+            grj.cjgzsj,
+            grj.jrdwsj,
+            r1.srzwmc,
+            r2.xxmc AS fisrtSchool,
+            r3.xxmc AS highestSchool,
+            r3.xlqdsj AS highestDate
+        FROM
+            GZ_RY_JBXX grj
+                LEFT JOIN
+            GZ_DW_DWXX gdd ON gdd.DWBM = grj.DWBM
+                LEFT JOIN
+            RankedZW r1 ON r1.rybm = grj.rybm AND r1.rn = 1
+                LEFT JOIN
+            RankedXL r2 ON r2.rybm = grj.rybm AND r2.rn = 1
+                LEFT JOIN
+            RankedXL2 r3 ON r3.rybm = grj.rybm AND r3.rn = 1
+        WHERE
+            grj.ryzt IN ('01', '02')
+        ORDER BY
+            grj.rybm;
+    </select>
+    <select id="listDistinctMc" resultType="com.lizy.rewritenew.dto.NameValueDTO">
+        select distinct srzwmc as value,gdd.dwmc+':' +grj.xm as name from GZ_RY_ZW zw
+            left join GZ_RY_JBXX grj on zw.rybm = grj.rybm
+            LEFT JOIN GZ_DW_DWXX gdd ON gdd.DWBM = grj.DWBM
+        where grj.ryzt in ('01','02')   and left(zw.srzwmc,1)='d'
+    </select>
+    <select id="listAllSchoolName" resultType="com.lizy.rewritenew.dto.NameValueDTO">
+        select distinct grx.XXMC as value,gdd.dwmc+':' +grj.xm as name from GZ_RY_XL grx
+            left join GZ_RY_JBXX grj on grx.rybm = grj.rybm
+            LEFT JOIN GZ_DW_DWXX gdd ON gdd.DWBM = grj.DWBM
+        where grj.ryzt in ('01','02') and left(xxmc,1)='d'
+    </select>
+    <select id="listAllSchoolFirstName" resultType="com.lizy.rewritenew.dto.NameValueDTO">
+        WITH CTE AS (
+            SELECT grx.XXMC AS value,
+            gdd.dwmc + ':' + grj.xm AS name,
+            ROW_NUMBER() OVER(PARTITION BY grx.XXMC ORDER BY grx.XXMC) AS rn
+        FROM GZ_RY_XL grx
+            LEFT JOIN GZ_RY_JBXX grj ON grx.rybm = grj.rybm
+            LEFT JOIN GZ_DW_DWXX gdd ON gdd.DWBM = grj.DWBM
+        WHERE grj.ryzt IN ('01', '02') AND LEFT(xxmc, 1) = 'd'
+            )
+        SELECT value, name
+        FROM CTE
+        WHERE rn = 1;
+    </select>
+
+    <select id="listAllCryptPositionMap" resultType="com.lizy.rewritenew.dto.NameValueDTO">
+        select DISTINCT g1.srzwmc as [name],g2.srzwmc as [value] from [解密前-安福县].dbo.GZ_RY_ZW g1 left join [安福县].dbo.GZ_RY_ZW g2 on g1.RYBM = g2.rybm and g1.ZWJLLSH = g2.ZWJLLSH
+        where g1.srzwmc is not null and g1.srzwmc != ''
+    </select>
+    <select id="listAllCryptSchoolMap" resultType="com.lizy.rewritenew.dto.NameValueDTO">
+        select DISTINCT g1.XXMC as [name],g2.XXMC as [value] from [解密前-安福县].dbo.GZ_RY_XL g1 left join [安福县].dbo.GZ_RY_XL g2 on g1.RYBM = g2.rybm and g1.XLLSH = g2.XLLSH
+        where g1.XXMC is not null and g1.XXMC != ''
+    </select>
+    <select id="listAllPerson" resultType="com.lizy.rewritenew.entity.LowOriginSimple">
+        WITH RankedZW AS (
+            SELECT
+                grz.*, grj.SFZH, grj.xm,
+                ROW_NUMBER() OVER (PARTITION BY grz.RYBM ORDER BY grz.ZXSJ DESC) AS rn
+            FROM
+                GZ_RY_ZW grz
+                    left JOIN
+                GZ_RY_JBXX grj ON grj.rybm = grz.rybm
+        ),
+             RankedXL AS (
+                 SELECT
+                     grx.xlqdsj, grx.xxmc, grx.rybm,
+                     ROW_NUMBER() OVER (PARTITION BY grx.RYBM ORDER BY grx.XLQDSJ) AS rn
+                 FROM
+                     GZ_RY_XL grx
+                         left JOIN
+                     GZ_RY_JBXX grj ON grj.rybm = grx.rybm
+             ),
+             RankedXL2 AS (
+                 SELECT
+                     grx.xlqdsj, grx.xxmc, grx.rybm,
+                     ROW_NUMBER() OVER (PARTITION BY grx.RYBM ORDER BY grx.XLQDSJ desc) AS rn
+                 FROM
+                     GZ_RY_XL grx
+                         left JOIN
+                     GZ_RY_JBXX grj ON grj.rybm = grx.rybm
+             )
+        SELECT
+            grj.ryxh,
+            grj.rybm AS rybm,
+            grj.dwbm,
+            gdd.DWMC AS dwbmStr,
+            grj.xm,
+            grj.sfzh,
+            grj.csny,
+            grj.cjgzsj,
+            grj.jrdwsj,
+            r1.srzwmc,
+            r2.xxmc AS fisrtSchool,
+            r3.xxmc AS highestSchool,
+            r3.xlqdsj AS highestDate
+        FROM
+            GZ_RY_JBXX grj
+                LEFT JOIN
+            GZ_DW_DWXX gdd ON gdd.DWBM = grj.DWBM
+                LEFT JOIN
+            RankedZW r1 ON r1.rybm = grj.rybm AND r1.rn = 1
+                LEFT JOIN
+            RankedXL r2 ON r2.rybm = grj.rybm AND r2.rn = 1
+                LEFT JOIN
+            RankedXL2 r3 ON r3.rybm = grj.rybm AND r3.rn = 1
+        WHERE
+            1=1
+        ORDER BY
+            grj.rybm;
+    </select>
+
+    <!--    &#45;&#45;                                                                                             and grj.BZXZ in  ('01','02',' ')-->
+
+
+    <!-- 完善 updateBatchForIdName -->
+    <update id="updateBatchForSchool" parameterType="java.util.List">
+        <foreach collection="dtoList" item="item" index="index" separator=";">
+            UPDATE GZ_RY_XL
+            SET xxmc = #{item.value}
+            WHERE xxmc = #{item.name}
+        </foreach>
+    </update>
+    <update id="updateBatchForPosition" parameterType="java.util.List">
+        <foreach collection="dtoList" item="item" index="index" separator=";">
+            UPDATE GZ_RY_ZW
+            SET srzwmc = #{item.value}
+            WHERE srzwmc = #{item.name}
+        </foreach>
+    </update>
 </mapper>

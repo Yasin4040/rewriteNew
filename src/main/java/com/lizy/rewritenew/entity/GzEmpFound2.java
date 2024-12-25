@@ -24,7 +24,7 @@ public class GzEmpFound2 implements Serializable {
     /**
      * 
      */
-    @TableId(value = "unitno")
+    @TableField(value = "unitno")
     private String unitno;
 
     /**
