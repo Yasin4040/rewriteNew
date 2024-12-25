@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lizy.rewritenew.mapper.GzEmpFound2Mapper">
+
+    <resultMap id="BaseResultMap" type="com.lizy.rewritenew.entity.GzEmpFound2">
+            <id property="employeeid" column="EMPLOYEEID" jdbcType="VARCHAR"/>
+            <id property="unitno" column="unitno" jdbcType="VARCHAR"/>
+            <result property="empname" column="EMPNAME" jdbcType="VARCHAR"/>
+            <result property="depno" column="DEPNO" jdbcType="VARCHAR"/>
+            <result property="empnm" column="EMPNM" jdbcType="VARCHAR"/>
+            <result property="sex" column="SEX" jdbcType="VARCHAR"/>
+            <result property="inentityNo" column="INENTITY_NO" jdbcType="VARCHAR"/>
+            <result property="nativeplace" column="NATIVEPLACE" jdbcType="VARCHAR"/>
+            <result property="nationNo" column="NATION_NO" jdbcType="VARCHAR"/>
+            <result property="worktime" column="WORKTIME" jdbcType="VARCHAR"/>
+            <result property="birthday" column="BIRTHDAY" jdbcType="VARCHAR"/>
+            <result property="entertime" column="ENTERTIME" jdbcType="VARCHAR"/>
+            <result property="causeNo" column="CAUSE_NO" jdbcType="VARCHAR"/>
+            <result property="catano" column="CATANO" jdbcType="VARCHAR"/>
+            <result property="cataflag" column="CATAFLAG" jdbcType="VARCHAR"/>
+            <result property="politic" column="POLITIC" jdbcType="VARCHAR"/>
+            <result property="partytime" column="PARTYTIME" jdbcType="VARCHAR"/>
+            <result property="interrup" column="INTERRUP" jdbcType="INTEGER"/>
+            <result property="eduYear" column="EDU_YEAR" jdbcType="INTEGER"/>
+            <result property="inMoney" column="IN_MONEY" jdbcType="REAL"/>
+            <result property="reserved" column="RESERVED" jdbcType="REAL"/>
+            <result property="armySal" column="ARMY_SAL" jdbcType="REAL"/>
+            <result property="decleveldate" column="DECLEVELDATE" jdbcType="VARCHAR"/>
+            <result property="chgdate" column="CHGDATE" jdbcType="VARCHAR"/>
+            <result property="state" column="STATE" jdbcType="VARCHAR"/>
+            <result property="shenpstate" column="SHENPSTATE" jdbcType="VARCHAR"/>
+            <result property="shenpno" column="SHENPNO" jdbcType="VARCHAR"/>
+            <result property="note" column="NOTE" jdbcType="VARCHAR"/>
+            <result property="vchar1" column="VCHAR1" jdbcType="VARCHAR"/>
+            <result property="vchar2" column="VCHAR2" jdbcType="VARCHAR"/>
+            <result property="varchar3" column="VARCHAR3" jdbcType="VARCHAR"/>
+            <result property="danId" column="dan_id" jdbcType="VARCHAR"/>
+            <result property="rybzId" column="rybz_id" jdbcType="VARCHAR"/>
+            <result property="gongzlx" column="gongzlx" jdbcType="VARCHAR"/>
+            <result property="bianzlx" column="bianzlx" jdbcType="VARCHAR"/>
+            <result property="zhengrjhkh" column="zhengrjhkh" jdbcType="VARCHAR"/>
+            <result property="yonggxs" column="yonggxs" jdbcType="VARCHAR"/>
+            <result property="renylyly" column="renylyly" jdbcType="VARCHAR"/>
+            <result property="kuadybz" column="kuadybz" jdbcType="VARCHAR"/>
+            <result property="renybz" column="renybz" jdbcType="VARCHAR"/>
+            <result property="pgjzBz" column="pgjz_bz" jdbcType="VARCHAR"/>
+            <result property="gongzffsj" column="gongzffsj" jdbcType="VARCHAR"/>
+            <result property="gongztfsj" column="gongztfsj" jdbcType="VARCHAR"/>
+            <result property="renyjfxs" column="renyjfxs" jdbcType="VARCHAR"/>
+            <result property="renyxz" column="renyxz" jdbcType="VARCHAR"/>
+            <result property="tigbl" column="tigbl" jdbcType="NUMERIC"/>
+            <result property="jiangjbl" column="jiangjbl" jdbcType="NUMERIC"/>
+            <result property="shenpdwfl" column="shenpdwfl" jdbcType="VARCHAR"/>
+            <result property="xingzfl" column="xingzfl" jdbcType="VARCHAR"/>
+            <result property="tuixsj" column="tuixsj" jdbcType="VARCHAR"/>
+            <result property="txTxfqssj" column="tx_txfqssj" jdbcType="VARCHAR"/>
+            <result property="txLtxlb" column="tx_ltxlb" jdbcType="VARCHAR"/>
+            <result property="txTxyy" column="tx_txyy" jdbcType="VARCHAR"/>
+            <result property="txGznx" column="tx_gznx" jdbcType="INTEGER"/>
+            <result property="txShenf" column="tx_shenf" jdbcType="VARCHAR"/>
+            <result property="txZhiw" column="tx_zhiw" jdbcType="VARCHAR"/>
+            <result property="txZhengzshdy" column="tx_zhengzshdy" jdbcType="VARCHAR"/>
+            <result property="txZhiwdc" column="tx_zhiwdc" jdbcType="VARCHAR"/>
+            <result property="txJib" column="tx_jib" jdbcType="VARCHAR"/>
+            <result property="txJiaohl" column="tx_jiaohl" jdbcType="INTEGER"/>
+            <result property="txZhesbl" column="tx_zhesbl" jdbcType="NUMERIC"/>
+            <result property="txSczzsj" column="tx_sczzsj" jdbcType="VARCHAR"/>
+            <result property="txXczzsj" column="tx_xczzsj" jdbcType="VARCHAR"/>
+            <result property="txTesbz" column="tx_tesbz" jdbcType="VARCHAR"/>
+            <result property="txZhongd" column="tx_zhongd" jdbcType="INTEGER"/>
+            <result property="yinhbm" column="yinhbm" jdbcType="VARCHAR"/>
+            <result property="yinhzh" column="yinhzh" jdbcType="VARCHAR"/>
+            <result property="txState" column="tx_state" jdbcType="VARCHAR"/>
+            <result property="txShenpbz" column="tx_shenpbz" jdbcType="VARCHAR"/>
+            <result property="renySort" column="reny_sort" jdbcType="INTEGER"/>
+            <result property="newBz1" column="new_bz1" jdbcType="VARCHAR"/>
+            <result property="newBz2" column="new_bz2" jdbcType="VARCHAR"/>
+            <result property="newBz3" column="new_bz3" jdbcType="VARCHAR"/>
+            <result property="newBz4" column="new_bz4" jdbcType="VARCHAR"/>
+            <result property="newBz5" column="new_bz5" jdbcType="VARCHAR"/>
+            <result property="newNumBz1" column="new_num_bz1" jdbcType="NUMERIC"/>
+            <result property="newNumBz2" column="new_num_bz2" jdbcType="NUMERIC"/>
+            <result property="newNumBz3" column="new_num_bz3" jdbcType="NUMERIC"/>
+            <result property="gongzlbbm" column="gongzlbbm" jdbcType="VARCHAR"/>
+            <result property="gongzxzbm" column="gongzxzbm" jdbcType="VARCHAR"/>
+            <result property="giukbm" column="giukbm" jdbcType="VARCHAR"/>
+            <result property="yskmbm" column="yskmbm" jdbcType="VARCHAR"/>
+            <result property="gongztfbj" column="gongztfbj" jdbcType="VARCHAR"/>
+            <result property="tesgxQudsj" column="tesgx_qudsj" jdbcType="VARCHAR"/>
+            <result property="tesgxZhixsj" column="tesgx_zhixsj" jdbcType="VARCHAR"/>
+            <result property="tesgxBil" column="tesgx_bil" jdbcType="NUMERIC"/>
+            <result property="tesgxRongy" column="tesgx_rongy" jdbcType="VARCHAR"/>
+            <result property="txShiwyy" column="tx_shiwyy" jdbcType="VARCHAR"/>
+            <result property="txShiwdd" column="tx_shiwdd" jdbcType="VARCHAR"/>
+            <result property="txAnzdd" column="tx_anzdd" jdbcType="VARCHAR"/>
+            <result property="txShifxsysbz" column="tx_shifxsysbz" jdbcType="VARCHAR"/>
+            <result property="txShifls" column="tx_shifls" jdbcType="VARCHAR"/>
+            <result property="employeeidOld" column="employeeid_old" jdbcType="VARCHAR"/>
+            <result property="newBz6" column="new_bz6" jdbcType="VARCHAR"/>
+            <result property="newBz7" column="new_bz7" jdbcType="VARCHAR"/>
+            <result property="newBz8" column="new_bz8" jdbcType="VARCHAR"/>
+            <result property="newBz9" column="new_bz9" jdbcType="VARCHAR"/>
+            <result property="newBz10" column="new_bz10" jdbcType="VARCHAR"/>
+            <result property="gongghzdnx" column="gongghzdnx" jdbcType="INTEGER"/>
+            <result property="kaohzd" column="kaohzd" jdbcType="INTEGER"/>
+            <result property="shenpreny" column="shenpreny" jdbcType="VARCHAR"/>
+            <result property="isFup" column="is_fup" jdbcType="VARCHAR"/>
+            <result property="gaoddc" column="gaoddc" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        EMPLOYEEID,unitno,EMPNAME,
+        DEPNO,EMPNM,SEX,
+        INENTITY_NO,NATIVEPLACE,NATION_NO,
+        WORKTIME,BIRTHDAY,ENTERTIME,
+        CAUSE_NO,CATANO,CATAFLAG,
+        POLITIC,PARTYTIME,INTERRUP,
+        EDU_YEAR,IN_MONEY,RESERVED,
+        ARMY_SAL,DECLEVELDATE,CHGDATE,
+        STATE,SHENPSTATE,SHENPNO,
+        NOTE,VCHAR1,VCHAR2,
+        VARCHAR3,dan_id,rybz_id,
+        gongzlx,bianzlx,zhengrjhkh,
+        yonggxs,renylyly,kuadybz,
+        renybz,pgjz_bz,gongzffsj,
+        gongztfsj,renyjfxs,renyxz,
+        tigbl,jiangjbl,shenpdwfl,
+        xingzfl,tuixsj,tx_txfqssj,
+        tx_ltxlb,tx_txyy,tx_gznx,
+        tx_shenf,tx_zhiw,tx_zhengzshdy,
+        tx_zhiwdc,tx_jib,tx_jiaohl,
+        tx_zhesbl,tx_sczzsj,tx_xczzsj,
+        tx_tesbz,tx_zhongd,yinhbm,
+        yinhzh,tx_state,tx_shenpbz,
+        reny_sort,new_bz1,new_bz2,
+        new_bz3,new_bz4,new_bz5,
+        new_num_bz1,new_num_bz2,new_num_bz3,
+        gongzlbbm,gongzxzbm,giukbm,
+        yskmbm,gongztfbj,tesgx_qudsj,
+        tesgx_zhixsj,tesgx_bil,tesgx_rongy,
+        tx_shiwyy,tx_shiwdd,tx_anzdd,
+        tx_shifxsysbz,tx_shifls,employeeid_old,
+        new_bz6,new_bz7,new_bz8,
+        new_bz9,new_bz10,gongghzdnx,
+        kaohzd,shenpreny,is_fup,
+        gaoddc
+    </sql>
+</mapper>
