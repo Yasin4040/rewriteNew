@@ -550,8 +550,8 @@ public class ExcelController {
             List<OriginSimple> allPerson = gzRyJbxxService.listSimple();
             // 用于存储不在simples列表中的Employee数据
 
-            HashMap<String, String> positionNameMap = new LinkedHashMap<>();
-            HashMap<String, String> schoolNameMap = new LinkedHashMap<>();
+            TreeMap<String, String> positionNameMap = new TreeMap<>();
+            TreeMap<String, String> schoolNameMap = new TreeMap<>();
 
             List<OriginSimple> updateList = new ArrayList<>();
             for (OriginSimple simple : allPerson) {
@@ -569,32 +569,32 @@ public class ExcelController {
                         schoolNameMap.put(simple.getFirstSchool(),employee.getFirstSchool());
                     }
                 }
-                if (StrUtil.startWith(simple.getHighestSchool(),"d")) {
-                    if(StrUtil.isNotBlank(employee.getFirstSchool())){
-                        schoolNameMap.put(simple.getHighestSchool(),employee.getFirstSchool());
-                    }
-                }
-//                if (StrUtil.startWith(simple.getHighestSchool(),"d")) {
-//                    if(StrUtil.isNotBlank(employee.getHighestSchool())){
-//                        schoolNameMap.put(simple.getHighestSchool(),employee.getHighestSchool());
+//                if (StrUtil.startWith(simple.getFirstSchool(),"d")) {
+//                    if(StrUtil.isNotBlank(employee.getFirstSchool())){
+//                        schoolNameMap.put(simple.getFirstSchool(),employee.getFirstSchool());
 //                    }
 //                }
+                if (StrUtil.startWith(simple.getHighestSchool(),"d")) {
+                    if(StrUtil.isNotBlank(employee.getHighestSchool())){
+                        schoolNameMap.put(simple.getHighestSchool(),employee.getHighestSchool());
+                    }
+                }
             }
             log.info(String.valueOf(schoolNameMap.size()));
             //将json转hashmap
-            readJsonFile("nf/school-nf.json", schoolNameMap);
-            readJsonFile("nf/position-nf.json", positionNameMap);
+            readJsonFile("xdq-1223/school-xdq.json", schoolNameMap);
+            readJsonFile("xdq-1223/position-xdq.json", positionNameMap);
             String jsonString = JSON.toJSONString(positionNameMap);
             String jsonString2 = JSON.toJSONString(schoolNameMap);
             log.info("2{}",String.valueOf(schoolNameMap.size()));
             //获取父路径
             File file2 = readJsonFileDir("position-nc.json");
             // 写入 jsonString 到 position-nf.json
-            File positionFile = new File(file2.getParent(),"/position-**.json");
+            File positionFile = new File(file2.getParent(),"/position-xdq.json");
             Files.write(positionFile.toPath(), jsonString.getBytes());
 
             // 写入 jsonString2 到 school-nf.json
-            File schoolFile = new File(file2.getParent(),"/school-**.json");
+            File schoolFile = new File(file2.getParent(),"/school-xdq.json");
             Files.write(schoolFile.toPath(), jsonString2.getBytes());
 
             log.info("一共{}条数据",updateList.size());
@@ -628,7 +628,7 @@ public class ExcelController {
         List<NameValueDTO> schoolList = cryptSchoolMap.entrySet().stream().map(x -> new NameValueDTO(x.getKey(), x.getValue())).collect(Collectors.toList());
 
 
-        this.updateThis(positionList, gzRyJbxxService::updateBatchForPosition);
+//        this.updateThis(positionList, gzRyJbxxService::updateBatchForPosition);
         this.updateThis(schoolList, gzRyJbxxService::updateBatchForSchool);
 
         return "";
