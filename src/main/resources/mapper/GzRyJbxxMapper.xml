@@ -231,7 +231,7 @@
             grj.cjgzsj,
             grj.jrdwsj,
             r1.srzwmc,
-            r2.xxmc AS fisrtSchool,
+            r2.xxmc AS firstSchool,
             r3.xxmc AS highestSchool,
             r3.xlqdsj AS highestDate
         FROM
@@ -255,12 +255,14 @@
             LEFT JOIN GZ_DW_DWXX gdd ON gdd.DWBM = grj.DWBM
         where grj.ryzt in ('01','02')   and left(zw.srzwmc,1)='d'
     </select>
+
     <select id="listAllSchoolName" resultType="com.lizy.rewritenew.dto.NameValueDTO">
         select distinct grx.XXMC as value,gdd.dwmc+':' +grj.xm as name from GZ_RY_XL grx
         left join GZ_RY_JBXX grj on grx.rybm = grj.rybm
         LEFT JOIN GZ_DW_DWXX gdd ON gdd.DWBM = grj.DWBM
         where grj.ryzt in ('01','02') and left(xxmc,1)='d'
     </select>
+
     <select id="listAllSchoolFirstName" resultType="com.lizy.rewritenew.dto.NameValueDTO">
         WITH CTE AS (
             SELECT grx.XXMC AS value,
